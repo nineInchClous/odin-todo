@@ -31,9 +31,10 @@
         <div id="content">
             <button type="button" id="add-todo-btn"><i class="fa-solid fa-plus"></i>Add Todo</button>
     
-            <form id="new-todo-form">
+            <form id="new-todo-form" class="hide">
                 <div>
                     <label for="title">Title<span>*</span></label>
+                    <p class="hide" id="error-title">Title must contains at least two (2) characters.</p>
                     <input type="text" name="title" id="title">
                 </div>
                 <div>
@@ -49,8 +50,8 @@
                     <input type="checkbox" name="important" id="important">
                 </div>
                 <div>
-                    <button type="submit">Create Todo</button>
-                    <button type="button" id="cancel-btn">Cancel</button>
+                    <button type="submit" id="submit-btn">Create Todo</button>
+                    <button type="reset" id="cancel-btn">Cancel</button>
                 </div>
             </form>
             <section id="todo-container">
