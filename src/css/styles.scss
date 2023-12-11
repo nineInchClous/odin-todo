@@ -1,0 +1,16 @@
+@import "normalize.css", "reset.css";
+
+:root.dark {
+    --color-base-bg: rgb(18, 18, 18);
+    --color-base-text: rgb(240, 240, 240);
+}
+:root.light {
+    --color-base-bg: rgb(240, 240, 240);
+    --color-base-text: rgb(18, 18, 18);
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
