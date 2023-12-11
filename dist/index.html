@@ -29,11 +29,11 @@
             </section>
         </aside>
         <div id="content">
-            <button type="button" id="new-todo">+</button>
+            <button type="button" id="add-todo-btn"><i class="fa-solid fa-plus"></i>Add Todo</button>
     
             <form id="new-todo-form">
                 <div>
-                    <label for="title">Title</label>
+                    <label for="title">Title<span>*</span></label>
                     <input type="text" name="title" id="title">
                 </div>
                 <div>
@@ -48,8 +48,24 @@
                     <label for="important">Important</label>
                     <input type="checkbox" name="important" id="important">
                 </div>
-                <button type="submit">Create Todo</button>
+                <div>
+                    <button type="submit">Create Todo</button>
+                    <button type="button" id="cancel-btn">Cancel</button>
+                </div>
             </form>
+            <section id="todo-container">
+                <article class="todo" data-id="0">
+                    <div class="todo-title">
+                        <h2><i class="fa-solid fa-star"></i>Buy some milk</h2>
+                        <div>
+                            <button type="button"><i class="fa-solid fa-check"></i></button>
+                            <button type="button"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button type="button"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, assumenda in cupiditate, temporibus suscipit sapiente eaque nesciunt veritatis iure aliquid eos sit perspiciatis harum cumque fuga facilis tenetur nam earum?</p>
+                </article>
+            </section>
         </div>
     </main>
     <footer>
