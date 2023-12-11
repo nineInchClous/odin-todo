@@ -1,4 +1,5 @@
 @import "normalize.css", "reset.css";
+@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
 :root.dark {
     --color-base-bg: rgb(18, 18, 18);
@@ -13,4 +14,114 @@
 *::after,
 *::before {
     box-sizing: border-box;
+}
+
+$dark: #082f49;
+$dark-blue: #075985;
+$blue: #0ea5e9;
+$light-blue: #7dd3fc;
+$white: #f0f9ff;
+
+$header-size: 150px;
+$footer-size: 100px;
+$shadow: 2px 2px 2px 0 rgba(51, 51, 51, 0.6);
+$transition: all 0.2s ease;
+
+%dark-brackground {
+    background-color: $dark;
+    color: $white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Arvo', serif;
+}
+h1 {
+    font-size: 3rem;
+    padding: 20px;
+    i {
+        margin-right: 20px;
+    }
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+header {
+    @extend %dark-brackground;
+    min-height: $header-size;
+    display: flex;
+    align-items: center;
+}
+
+main {
+    min-height: calc(100vh - $header-size - $footer-size);
+    display: flex;
+
+    #content {
+        background-color: $white;
+        color: $dark;
+        flex-grow: 1;
+    }
+    aside {
+        flex-basis: 18vw;
+        min-width: 200px;
+        background-color: $dark-blue;
+        color: $white;
+        padding: 15px;
+
+        section:last-of-type h2 {
+            margin-top: 30px;
+        }
+        h2 {
+            font-size: 1.7rem;
+        }
+        hr {
+            color: $white;
+        }
+        button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background-color: transparent;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            color: white;
+            font-size: 1.3rem;
+            padding: 10px;
+            cursor: pointer;
+            transition: $transition;
+
+            &:hover {
+                border-color: $white;
+            }
+
+            i {
+                margin-right: 10px;
+                width: 30px;
+            }
+        }
+    }
+}
+
+footer {
+    @extend %dark-brackground;
+    min-height: $footer-size;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        display: inline-block;
+    }
+    i {
+        color: $white;
+        transition: $transition;
+        padding: 20px;
+
+        &:hover {
+            transform: rotate(360deg) scale(1.1);
+        }
+    }
 }
