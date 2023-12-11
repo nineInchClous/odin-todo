@@ -1,6 +1,6 @@
 import createTodo from './todo';
 import { addTodoToList, updateTodo } from './todoList';
-import { printTodo } from './DOMGenerator';
+import { printNewTodo } from './DOMGenerator';
 import { format } from 'date-fns';
 
 const addTodoBtn = document.getElementById('add-todo-btn');
@@ -37,7 +37,7 @@ function refreshTodoView(pId, pTodo) {
     updateTodo.childNodes[1].textContent = pTodo.description;
 
     if (pTodo.dueDate !== '') {
-        updateTodo.childNodes[2].textContent = 'Due date: ' + pTodo.dueDate;
+        updateTodo.childNodes[2].textContent = 'Due date: ' + format(pTodo.dueDate, 'yyyy-MM-dd');
     } else {
         updateTodo.childNodes[2].textContent = '';
     }
@@ -53,7 +53,8 @@ export function handleSubmitForm() {
 
         let dueDate = '';
         if (dueDateInput.value !== '') {
-            dueDate = format(new Date(dueDateInput.value), 'yyy-MM-dd');
+            dueDate = new Date(dueDateInput.value);
+            dueDate.setDate(dueDate.getDate() + 1);
         }
 
         const newTodo = createTodo(titleInput.value.trim(), descriptionInput.value.trim(), dueDate, importantInput.checked, '');
@@ -63,7 +64,7 @@ export function handleSubmitForm() {
             refreshTodoView(newTodoForm.getAttribute('data-id'), newTodo);
         } else {
             addTodoToList(newTodo);
-            printTodo(todoContainer, newTodo);
+            printNewTodo(todoContainer, newTodo);
         }
 
         newTodoForm.reset();
@@ -88,7 +89,9 @@ export function showForm(pVisible) {
 export function fillForm(pTodo) {
     titleInput.value = pTodo.title;
     descriptionInput.value = pTodo.description;
-    dueDateInput.value = pTodo.dueDate;
+    if (pTodo.dueDate !== '') {
+        dueDateInput.value = format(pTodo.dueDate, 'yyyy-MM-dd');
+    }
     importantInput.checked = pTodo.important;
     newTodoForm.setAttribute('data-id', pTodo.getID());
     submitBtn.textContent = 'Update Todo'

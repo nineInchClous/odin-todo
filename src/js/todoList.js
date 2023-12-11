@@ -18,3 +18,27 @@ export function updateTodo(pId, pTodo) {
         }
     });
 }
+
+export function getAllTodos() {
+    return todoList;
+}
+
+export function getImportantTodos() {
+    return todoList.filter((todo) => todo.important);
+}
+
+export function getTodayTodos() {
+    return todoList.filter((todo) => {
+        if (todo.dueDate !== '') {
+            const now = new Date();
+            return (todo.dueDate.getYear() === now.getYear() && todo.dueDate.getMonth() === now.getMonth() && todo.dueDate.getDay() === now.getDay());
+        }
+    });
+}
+
+export function getMonthTodos() {
+    return todoList.filter((todo) => {
+        const now = new Date();
+        return (todo.dueDate !== '' && todo.dueDate.getYear() === now.getYear() && todo.dueDate.getMonth() === now.getMonth());
+    });
+}

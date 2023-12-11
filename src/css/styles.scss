@@ -112,6 +112,7 @@ main {
                 width: 100%;
                 box-shadow: $shadow;
                 margin: 20px auto;
+                transition: $transition;
 
                 .todo-title {
                     display: flex;
@@ -246,11 +247,16 @@ main {
             color: white;
             font-size: 1.3rem;
             padding: 10px;
+            margin: 10px 0;
             cursor: pointer;
             transition: $transition;
 
             &:hover {
                 border-color: $white;
+            }
+            &.active {
+                background-color: $light-blue;
+                color: $dark;
             }
 
             i {
