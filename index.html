@@ -4,12 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odin Project - Todo List</title>
-    <link rel="icon" type="image/x-icon" href="">
-    <script type="module" src="main.js"></script>
+    <link rel="icon" type="image/x-icon" href="./favicon-32x32.png">
+    <script type="module" src="main.js" defer></script>
+    <script src="https://kit.fontawesome.com/9fc52b5779.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="content">
-        <h1>hola</h1>
-    </div>
+    <header>
+        <h1><i class="fa-solid fa-check-double"></i>Another Todo List</h1>
+    </header>
+    <main>
+        <aside>
+            <section>
+                <h2>Home</h2>
+                <hr>
+                <button type="button"><i class="fa-solid fa-clipboard-list"></i>All Tasks</button>
+                <button type="button"><i class="fa-solid fa-calendar-day"></i>Today</button>
+                <button type="button"><i class="fa-solid fa-calendar-week"></i>Week</button>
+                <button type="button"><i class="fa-solid fa-star"></i>Important</button>
+            </section>
+            <section>
+                <h2>Projects</h2>
+                <hr>
+                <button type="button"><i class="fa-solid fa-plus"></i>Add Project</button>
+            </section>
+        </aside>
+        <div id="content">
+            <button type="button" id="new-todo">+</button>
+    
+            <form id="new-todo-form">
+                <div>
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title">
+                </div>
+                <div>
+                    <label for="description">Description</label>
+                    <input type="text" name="description" id="description">
+                </div>
+                <div>
+                    <label for="due-date">Due date</label>
+                    <input type="date" name="due-date" id="due-date">
+                </div>
+                <div>
+                    <label for="important">Important</label>
+                    <input type="checkbox" name="important" id="important">
+                </div>
+                <button type="submit">Create Todo</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>Copyright &copy; Thibault Castelli</p>
+        <a href="https://github.com/nineInchClous" target="_blank"><i class="fa-brands fa-github"></i></a>
+    </footer>
 </body>
 </html>
