@@ -1,30 +1,20 @@
 // #region Imports
 import './css/styles.scss';
-import createTodo from './js/todo';
-import { printTodo } from './js/DOMGenerator';
-import { format } from 'date-fns';
+import { handleSubmitForm, showForm } from './js/DOMHandler';
 // #endregion
 
 const content = document.getElementById('content');
 const newTodoForm = document.getElementById('new-todo-form');
-const todoContainer = document.getElementById('todo-container');
+const addTodoBtn = document.getElementById('add-todo-btn');
 
 function initialize() {
     newTodoForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const title = document.getElementById('title').value.trim();
-        const description = document.getElementById('description').value.trim();
+        handleSubmitForm();
+    });
 
-        let dueDate = '';
-        if (document.getElementById('due-date').value !== '') {
-            dueDate = format(new Date(document.getElementById('due-date').value), 'yyy-MM-dd');
-        }
-        
-        const important = document.getElementById('important').checked;
-        const newTodo = createTodo(title, description, dueDate, important, '');
-        console.log(newTodo);
-        printTodo(todoContainer, newTodo);
-    })
+    addTodoBtn.addEventListener('click', () => showForm(true));
+    document.getElementById('cancel-btn').addEventListener('click', () => showForm(false));
 }
 
 document.addEventListener('DOMContentLoaded', initialize);

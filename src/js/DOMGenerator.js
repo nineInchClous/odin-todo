@@ -1,3 +1,6 @@
+import { deleteTodo } from "./todoList";
+import { fillForm } from "./DOMHandler";
+
 export function printTodo(pContainer, pTodo) {
     const article = document.createElement('article');
     article.className = 'todo';
@@ -10,7 +13,6 @@ export function printTodo(pContainer, pTodo) {
         const starIcon = document.createElement('i');
         starIcon.className = 'fa-solid fa-star';
         h2.appendChild(starIcon);
-        console.log(h2);
     }
     h2.appendChild(document.createTextNode(pTodo.title));
     todoTitle.appendChild(h2);
@@ -31,11 +33,12 @@ export function printTodo(pContainer, pTodo) {
     });
     const editBtn = createTodoBtn('fa-solid fa-pen-to-square');
     editBtn.addEventListener('click', () => {
-
+        fillForm(pTodo);
     });
     const deleteBtn = createTodoBtn('fa-solid fa-trash');
     deleteBtn.addEventListener('click', () => {
-
+        deleteTodo(pTodo.getID());
+        article.remove();
     });
 
     divBtns.appendChild(checkBtn);

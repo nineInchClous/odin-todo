@@ -37,7 +37,9 @@ $transition: all 0.2s ease;
     white-space: nowrap;
     width: 1px;
 }
-
+.hide {
+    display: none;
+}
 %dark-brackground {
     background-color: $dark;
     color: $white;
@@ -99,6 +101,7 @@ main {
         background-color: $white;
         color: $dark;
         flex-grow: 1;
+        padding: 20px;
 
         #todo-container {
             .todo {
@@ -106,7 +109,7 @@ main {
                 border: 1px solid $dark;
                 border-radius: 5px;
                 padding: 15px 25px;
-                width: 90%;
+                width: 100%;
                 box-shadow: $shadow;
                 margin: 20px auto;
 
@@ -175,6 +178,14 @@ main {
                 &[type=date] {
                     width: 100%;
                 }
+
+                &.error-input {
+                    border: 1px solid red;
+                }
+            }
+
+            p {
+                color: red;
             }
 
             div:nth-of-type(4) {
