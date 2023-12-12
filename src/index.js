@@ -1,12 +1,20 @@
 // #region Imports
 import './css/styles.scss';
 import { handleSubmitFormTodo, showTodoForm, setActiveLink, showProjectForm, handleSubmitFormProject } from './js/DOMHandler';
-import { printTodoList } from './js/DOMGenerator';
-import { getAllTodos, getTodayTodos, getMonthTodos, getImportantTodos } from './js/todoList';
-import { newTodoForm, addTodoBtn, todoContainer, allTodosBtn, todayTodosBtn, monthTodosBtn, importantTodosBtn, addProjectBtn, newProjectForm, cancelProjectFormBtn } from './js/ref';
+import { printAllProjects, printTodoList, refreshOptionProject } from './js/DOMGenerator';
+import { getAllTodos, getTodayTodos, getMonthTodos, getImportantTodos, loadTodos } from './js/todoList';
+import { loadProjects } from './js/projects';
+import { newTodoForm, addTodoBtn, todoContainer, allTodosBtn, todayTodosBtn, monthTodosBtn, importantTodosBtn, addProjectBtn, newProjectForm, cancelProjectFormBtn, projectContainer } from './js/ref';
 // #endregion
 
 function initialize() {
+    loadTodos();
+    printTodoList(todoContainer, getAllTodos());
+
+    loadProjects();
+    printAllProjects(projectContainer);
+    refreshOptionProject();
+
     newTodoForm.addEventListener('submit', (e) => {
         e.preventDefault();
         handleSubmitFormTodo();

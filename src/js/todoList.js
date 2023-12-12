@@ -1,3 +1,5 @@
+import createTodo from "./todo";
+
 let todoList = [];
 
 export function addTodoToList(pTodo) {
@@ -6,6 +8,7 @@ export function addTodoToList(pTodo) {
 
 export function deleteTodo(pId) {
     todoList = todoList.filter((todo) => todo.getID() !== pId);
+    saveTodos();
 }
 
 export function updateTodo(pId, pTodo) {
@@ -46,4 +49,17 @@ export function getMonthTodos() {
 
 export function getTodoByProject(pProject) {
     return todoList.filter((todo) => todo.project === pProject);
+}
+
+export function loadTodos() {
+    if ('todos' in localStorage) {
+        const todoListTemp = JSON.parse(localStorage.getItem('todos'));
+        todoListTemp.forEach((todo) => {
+            todoList.push(createTodo(todo.title, todo.description, new Date(todo.dueDate), todo.important, todo.project));
+        })
+    }
+}
+
+export function saveTodos() {
+    localStorage.setItem('todos', JSON.stringify(todoList));
 }

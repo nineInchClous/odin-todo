@@ -1,7 +1,7 @@
 import createTodo from './todo';
-import { addTodoToList, updateTodo } from './todoList';
+import { addTodoToList, updateTodo, saveTodos } from './todoList';
 import { printNewTodo, printProject } from './DOMGenerator';
-import { addProject } from './projects';
+import { addProject, saveProjects } from './projects';
 import { addTodoBtn, newTodoForm, titleInput, titleError, descriptionInput, dueDateInput, importantInput, selectProject, submitBtn, todoContainer, newProjectForm, projectNameInput, nameError, projectContainer, allTodosBtn, todayTodosBtn, monthTodosBtn, importantTodosBtn } from './ref';
 import { format } from 'date-fns';
 
@@ -74,6 +74,8 @@ export function handleSubmitFormTodo() {
 
         newTodoForm.reset();
         showTodoForm(false);
+
+        saveTodos();
     }
 }
 
@@ -129,6 +131,8 @@ export function handleSubmitFormProject() {
 
         projectNameInput.value = '';
         showProjectForm(false);
+
+        saveProjects();
     }
 }
 

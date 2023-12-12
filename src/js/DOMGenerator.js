@@ -1,10 +1,8 @@
 import { deleteTodo, getTodoByProject } from "./todoList";
 import { fillFormTodo, removeActiveLink, updateTodoOnComplete } from "./DOMHandler";
-import { getAllProjects, removeProject } from "./projects";
+import { getAllProjects } from "./projects";
+import { selectProject, todoContainer } from "./ref";
 import { format } from 'date-fns';
-
-const selectProject = document.getElementById('project-select');
-const todoContainer = document.getElementById('todo-container');
 
 export function printTodoList(pContainer, pTodoList) {
     pContainer.innerHTML = '';
@@ -101,6 +99,13 @@ export function printProject(pContainer, pProject) {
         btn.className = 'active';
     });
     pContainer.appendChild(btn);
+}
+
+export function printAllProjects(pContainer) {
+    const projects = getAllProjects();
+    projects.forEach((project) => {
+        printProject(pContainer, project);
+    });
 }
 
 export function refreshOptionProject() {
