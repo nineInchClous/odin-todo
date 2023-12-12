@@ -25,7 +25,18 @@
             <section>
                 <h2>Projects</h2>
                 <hr>
-                <button type="button"><i class="fa-solid fa-plus"></i>Add Project</button>
+                <div id="project-container">
+                </div>
+                <button type="button" id="add-project-btn"><i class="fa-solid fa-plus"></i>Add Project</button>
+                <form id="new-project-form" class="hide">
+                    <label for="project-name" class="visually-hidden">Project name</label>
+                    <p class="hide" id="error-name">Project name must contains at least two (2) characters.</p>
+                    <input type="text" name="project-name" id="project-name" placeholder="Project name">
+                    <div class="btns-form">
+                        <button type="submit">Create Project</button>
+                        <button type="reset" class="cancel-btn" id="cancel-project">Cancel</button>
+                    </div>
+                </form>
             </section>
         </aside>
         <div id="content">
@@ -46,26 +57,21 @@
                     <input type="date" name="due-date" id="due-date">
                 </div>
                 <div>
+                    <label for="project-select">Project</label>
+                    <select name="project-select" id="project-select">
+                        <option selected value="">None</option>
+                    </select>
+                </div>
+                <div>
                     <label for="important">Important</label>
                     <input type="checkbox" name="important" id="important">
                 </div>
-                <div>
-                    <button type="submit" id="submit-btn">Create Todo</button>
-                    <button type="reset" id="cancel-btn">Cancel</button>
+                <div class="btns-form">
+                    <button type="submit" id="submit-btn-todo">Create Todo</button>
+                    <button type="reset" id="cancel-btn-todo" class="cancel-btn">Cancel</button>
                 </div>
             </form>
             <section id="todo-container">
-                <!-- <article class="todo" data-id="0">
-                    <div class="todo-title">
-                        <h2><i class="fa-solid fa-star"></i>Buy some milk</h2>
-                        <div>
-                            <button type="button"><i class="fa-solid fa-check"></i></button>
-                            <button type="button"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button type="button"><i class="fa-solid fa-trash"></i></button>
-                        </div>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, assumenda in cupiditate, temporibus suscipit sapiente eaque nesciunt veritatis iure aliquid eos sit perspiciatis harum cumque fuga facilis tenetur nam earum?</p>
-                </article> -->
             </section>
         </div>
     </main>

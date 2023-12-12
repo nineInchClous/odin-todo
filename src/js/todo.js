@@ -8,7 +8,7 @@ export default function createTodo(pTitle, pDescription, pDueDate, pImportant, p
     let description = pDescription;
     let dueDate = pDueDate;
     let important = pImportant;
-    let project = pProject
+    let project = pProject;
     let complete = false;
 
     const getID = () => id;

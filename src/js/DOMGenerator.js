@@ -1,6 +1,10 @@
-import { deleteTodo } from "./todoList";
-import { fillForm } from "./DOMHandler";
+import { deleteTodo, getTodoByProject } from "./todoList";
+import { fillFormTodo, removeActiveLink, updateTodoOnComplete } from "./DOMHandler";
+import { getAllProjects, removeProject } from "./projects";
 import { format } from 'date-fns';
+
+const selectProject = document.getElementById('project-select');
+const todoContainer = document.getElementById('todo-container');
 
 export function printTodoList(pContainer, pTodoList) {
     pContainer.innerHTML = '';
@@ -28,18 +32,29 @@ export function printNewTodo(pContainer, pTodo) {
 
     const date = document.createElement('p');
     if (pTodo.dueDate !== '') {
-        date.textContent = 'Due date: ' + format(pTodo.dueDate, 'yyy-MM-dd');
+        const spanDate = document.createElement('span');
+        spanDate.textContent = 'Due date: ';
+        date.appendChild(spanDate);
+        date.appendChild(document.createTextNode(format(pTodo.dueDate, 'yyy-MM-dd')));
+    }
+
+    const project = document.createElement('p');
+    if (pTodo.project !== '') {
+        const spanProject = document.createElement('span');
+        spanProject.textContent = 'Project: ';
+        project.appendChild(spanProject);
+        project.appendChild(document.createTextNode(pTodo.project));
     }
 
     const divBtns = document.createElement('div');
     const checkBtn = createTodoBtn('fa-solid fa-check');
     checkBtn.addEventListener('click', () => {
         pTodo.changeCompleteState();
-        updateTodoOnComplete(pTodo.getComplete(), title, description, date, checkBtn);
+        updateTodoOnComplete(pTodo.getComplete(), title, description, date, checkBtn, project);
     });
     const editBtn = createTodoBtn('fa-solid fa-pen-to-square');
     editBtn.addEventListener('click', () => {
-        fillForm(pTodo);
+        fillFormTodo(pTodo);
     });
     const deleteBtn = createTodoBtn('fa-solid fa-trash');
     deleteBtn.addEventListener('click', () => {
@@ -55,8 +70,9 @@ export function printNewTodo(pContainer, pTodo) {
     article.appendChild(todoTitle);
     article.appendChild(description);
     article.appendChild(date);
+    article.appendChild(project);
 
-    updateTodoOnComplete(pTodo.getComplete(), title, description, date, checkBtn);
+    updateTodoOnComplete(pTodo.getComplete(), title, description, date, checkBtn, project);
 
     pContainer.appendChild(article);
 }
@@ -71,20 +87,34 @@ function createTodoBtn(pIconClass) {
     return btn;
 }
 
-function updateTodoOnComplete(pComplete, pTitle, pDescription, pDueDate, pCheckBtn) {
-    if (pComplete) {
-        pDescription.parentElement.style.backgroundColor = '#7dd3fc';
-        pTitle.style.textDecoration = 'line-through';
-        pDescription.style.textDecoration = 'line-through';
-        pDueDate.style.textDecoration = 'line-through';
-        pCheckBtn.style.backgroundColor = '#082f49';
-        pCheckBtn.style.color = '#f0f9ff';
-    } else {
-        pDescription.parentElement.style.backgroundColor = '#0ea5e9';
-        pTitle.style.textDecoration = '';
-        pDescription.style.textDecoration = '';
-        pDueDate.style.textDecoration = '';
-        pCheckBtn.style.color = '#082f49';
-        pCheckBtn.style.backgroundColor = '#f0f9ff';
-    }
+export function printProject(pContainer, pProject) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    const i = document.createElement('i');
+    i.className = 'fa-solid fa-rectangle-list';
+    btn.appendChild(i);
+    btn.appendChild(document.createTextNode(pProject));
+    btn.setAttribute('data-project', pProject);
+    btn.addEventListener('click', () => {
+        printTodoList(todoContainer, getTodoByProject(pProject));
+        removeActiveLink();
+        btn.className = 'active';
+    });
+    pContainer.appendChild(btn);
+}
+
+export function refreshOptionProject() {
+    selectProject.innerHTML = '';
+    const defaultOption = document.createElement('option');
+    defaultOption.textContent = 'None';
+    defaultOption.value = '';
+    selectProject.appendChild(defaultOption);
+
+    const projects = getAllProjects();
+    projects.forEach((project) => {
+        const option = document.createElement('option');
+        option.textContent = project;
+        option.value = project;
+        selectProject.appendChild(option);
+    });
 }

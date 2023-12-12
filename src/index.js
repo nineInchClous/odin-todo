@@ -1,36 +1,19 @@
 // #region Imports
 import './css/styles.scss';
-import { handleSubmitForm, showForm } from './js/DOMHandler';
+import { handleSubmitFormTodo, showTodoForm, setActiveLink, showProjectForm, handleSubmitFormProject } from './js/DOMHandler';
 import { printTodoList } from './js/DOMGenerator';
 import { getAllTodos, getTodayTodos, getMonthTodos, getImportantTodos } from './js/todoList';
+import { newTodoForm, addTodoBtn, todoContainer, allTodosBtn, todayTodosBtn, monthTodosBtn, importantTodosBtn, addProjectBtn, newProjectForm, cancelProjectFormBtn } from './js/ref';
 // #endregion
-
-const content = document.getElementById('content');
-const newTodoForm = document.getElementById('new-todo-form');
-const addTodoBtn = document.getElementById('add-todo-btn');
-const todoContainer = document.getElementById('todo-container');
-
-const allTodosBtn = document.getElementById('all-todos');
-const todayTodosBtn = document.getElementById('today-todos');
-const monthTodosBtn = document.getElementById('month-todos');
-const importantTodosBtn = document.getElementById('important-todos');
-
-function setActiveLink(pActiveLink) {
-    allTodosBtn.className = '';
-    todayTodosBtn.className = '';
-    monthTodosBtn.className = '';
-    importantTodosBtn.className = '';
-    pActiveLink.className = 'active';
-}
 
 function initialize() {
     newTodoForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        handleSubmitForm();
+        handleSubmitFormTodo();
     });
 
-    addTodoBtn.addEventListener('click', () => showForm(true));
-    document.getElementById('cancel-btn').addEventListener('click', () => showForm(false));
+    addTodoBtn.addEventListener('click', () => showTodoForm(true));
+    document.getElementById('cancel-btn-todo').addEventListener('click', () => showTodoForm(false));
 
     allTodosBtn.addEventListener('click', () => {
         printTodoList(todoContainer, getAllTodos());
@@ -48,6 +31,13 @@ function initialize() {
         printTodoList(todoContainer, getImportantTodos());
         setActiveLink(importantTodosBtn);
     });
+
+    addProjectBtn.addEventListener('click', () => showProjectForm(true));
+    newProjectForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        handleSubmitFormProject();
+    });
+    cancelProjectFormBtn.addEventListener('click', () => showProjectForm(false));
 }
 
 document.addEventListener('DOMContentLoaded', initialize);

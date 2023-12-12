@@ -15,6 +15,7 @@ export function updateTodo(pId, pTodo) {
             todo.description = pTodo.description;
             todo.important = pTodo.important;
             todo.dueDate = pTodo.dueDate;
+            todo.project = pTodo.project;
         }
     });
 }
@@ -41,4 +42,8 @@ export function getMonthTodos() {
         const now = new Date();
         return (todo.dueDate !== '' && todo.dueDate.getYear() === now.getYear() && todo.dueDate.getMonth() === now.getMonth());
     });
+}
+
+export function getTodoByProject(pProject) {
+    return todoList.filter((todo) => todo.project === pProject);
 }
